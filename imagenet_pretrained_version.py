@@ -485,6 +485,7 @@ def main():
     # Using un-fused model will fail.
     # Because there is no quantized layer implementation for a single batch normalization layer.
     # quantized_model = QuantizedResNet18(model_fp32=model)
+
     # Select quantization schemes from
     # https://pytorch.org/docs/stable/quantization-support.html
     quantization_config = torch.quantization.get_default_qconfig("fbgemm")
@@ -493,8 +494,6 @@ def main():
     # quantization_config = torch.quantization.QConfig(activation=torch.quantization.MinMaxObserver.with_args(dtype=torch.quint8), weight=torch.quantization.MinMaxObserver.with_args(dtype=torch.qint8, qscheme=torch.per_tensor_symmetric))
 
     quantized_model.qconfig = quantization_config
-
-    # Print quantization configurations
     print("\nQConfig:")
     print(quantized_model.qconfig)
 
